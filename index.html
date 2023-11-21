@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenNoel 🎄🎅🎁</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1324/1324728.png">
+    <style>
+        /* Add CSS styles for the Christmas decoration */
+        body {
+            background-color: white;
+            background-repeat: repeat;
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        /* Add CSS styles for the countdown text */
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 200px;
+        }
+        
+        /* Add CSS styles for the countdown numbers */
+        .countdown-card {
+            display: inline-block;
+            background-color: red;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration"></div>
+    <h1 style="text-align: center;">🎄 OpenNoel - Christmas Countdown 🎄</h1>
+    <div class="countdown" id="countdown">
+        <div class="countdown-card" id="days">&#127876;</div>
+        <div class="countdown-card" id="hours">&#127878;</div>
+        <div class="countdown-card" id="minutes">&#127877;</div>
+        <div class="countdown-card" id="seconds">&#127873;</div>
+    </div>
+
+    <script>
+        // Calculate the remaining time until Christmas
+        function calculateTimeUntilChristmas() {
+            var today = new Date();
+            var christmas = new Date(today.getFullYear(), 11, 25);
+            if (today.getMonth() == 11 && today.getDate() > 25) {
+                christmas.setFullYear(christmas.getFullYear() + 1);
+            }
+            var remainingTime = christmas - today;
+            return remainingTime;
+        }
+
+        // Update the countdown text
+        function updateCountdown() {
+            var countdownElement = document.getElementById("countdown");
+            var remainingTime = calculateTimeUntilChristmas();
+
+            // Calculate the remaining days, hours, minutes, and seconds
+            var days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            // Update the countdown elements
+            document.getElementById("days").innerHTML = days + " days";
+            document.getElementById("hours").innerHTML = hours + " hours";
+            document.getElementById("minutes").innerHTML = minutes + " minutes";
+            document.getElementById("seconds").innerHTML = seconds + " seconds";
+        }
+
+        // Call the updateCountdown function every second
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
+
